@@ -1,0 +1,2 @@
+# openPlaud
+Plaud alternative
