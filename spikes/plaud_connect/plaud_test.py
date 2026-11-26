@@ -197,7 +197,7 @@ def api_get(path: str) -> dict:
 def fmt_dur(ms):
     if not ms:
         return "?"
-    s = int(ms) // 1000 if int(ms) > 100000 else int(ms)  # API może zwracać ms lub s
+    s = int(ms) // 1000  # API zwraca milisekundy (potwierdzone w T1)
     return f"{s // 3600}:{s % 3600 // 60:02d}:{s % 60:02d}"
 
 

@@ -10,3 +10,4 @@
 | R6 | Darmowe konto Apple: aplikacja wygasa po 7 dniach, brak TestFlight i Sign in with Apple | Niski | Pewne | Zakup konta 99 USD przed etapem 2 |
 | R7 | Nazwa i znak towarowy: nie można używać „PLAUD” w nazwie aplikacji | Niski | — | Nazwa repozytorium „openPlaud” (prywatnie OK); przed App Store zmiana nazwy — istnieje już projekt OpenPlaud (ByteFine/openplaud) i znak PLAUD |
 | R8 | Przechowywanie audio w chmurze (do odtwarzania na www) — koszty po przekroczeniu darmowych limitów | Niski | Średnie | Domyślnie synchronizujemy tylko tekst; audio opcjonalnie |
+| R9 | PLAUD zwraca audio jako Ogg/Opus (`audio/ogg`). AVFoundation na iOS nie czyta kontenera Ogg — potrzebny dekoder Opus w aplikacji | Średni | Pewne | Pakiet Swift z libopus/libogg; w teście T2 konwersja na Macu |
