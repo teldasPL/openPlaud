@@ -1,0 +1,11 @@
+.secrets/
+downloads/
+*.opus
+*.mp3
+*.m4a
+*.wav
+.DS_Store
+DerivedData/
+xcuserdata/
+node_modules/
+.env*
