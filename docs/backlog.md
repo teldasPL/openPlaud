@@ -5,7 +5,7 @@
 | # | Test | Kryterium akceptacji | Status |
 |---|---|---|---|
 | T1 | Połączenie z kontem PLAUD (`spikes/plaud_connect`) | Logowanie w przeglądarce, lista nagrań, pobrany plik audio; żadna minuta transkrypcji nie zużyta | ✅ Zaliczony 2026-11-26 (patrz `spikes/plaud_connect/RESULTS.md`) |
-| T2 | Whisper PL na iPhonie 15 Pro | Transkrypcja 10 min prawdziwego nagrania; zmierzony czas i oceniona jakość (Ty oceniasz 1–5) | Do zrobienia |
+| T2 | Whisper PL na iPhonie 15 Pro (`spikes/whisper_ios`) | Transkrypcja 25 min prawdziwego nagrania; zmierzony czas i oceniona jakość (Ty oceniasz 1–5) | Gotowy do uruchomienia |
 | T3 | Podsumowanie PL: lokalnie vs klucz API | Dwa podsumowania tej samej transkrypcji; ocena 1–5 | Do zrobienia |
 | T4 | Logowanie PLAUD z poziomu iOS (ryzyko R2) | Token uzyskany w aplikacji testowej na iPhonie | Do zrobienia |
 

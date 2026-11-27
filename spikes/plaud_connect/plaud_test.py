@@ -19,6 +19,8 @@ import http.server
 import json
 import os
 import secrets
+import shutil
+import subprocess
 import socketserver
 import stat
 import sys
@@ -236,7 +238,38 @@ def main():
             w.write(chunk)
     size = os.path.getsize(out)
     print(f"Gotowe: {size / 1e6:.1f} MB, typ: {ctype}, czas: {time.time() - t0:.1f} s")
+    base = os.path.join(DOWNLOADS, f["id"])
+    save_plaud_texts(detail, base)
+    to_wav(out, base + ".wav")
     print("\nTEST 1: OK")
+
+
+def save_plaud_texts(detail: dict, base: str) -> None:
+    """Zapisuje istniejącą transkrypcję i podsumowanie PLAUD (do porównania w T2/T3)."""
+    for item in detail.get("source_list") or []:
+        if item.get("data_type") == "transaction":
+            try:
+                segs = json.loads(item.get("data_content") or "[]")
+            except json.JSONDecodeError:
+                continue
+            lines = [f"[{fmt_dur(sg.get('start_time'))}] {sg.get('speaker') or ''}: {sg.get('content', '')}" for sg in segs]
+            with open(base + "_plaud_transkrypcja.txt", "w") as fh:
+                fh.write("\n".join(lines))
+            print(f"Zapisano transkrypcję PLAUD → {base}_plaud_transkrypcja.txt ({len(segs)} fragmentów)")
+    for item in detail.get("note_list") or []:
+        if item.get("data_type") == "auto_sum_note" and item.get("data_content"):
+            with open(base + "_plaud_podsumowanie.md", "w") as fh:
+                fh.write(item["data_content"])
+            print(f"Zapisano podsumowanie PLAUD → {base}_plaud_podsumowanie.md")
+
+
+def to_wav(src: str, dst: str) -> None:
+    """Ogg/Opus → WAV 16 kHz mono (iPhone nie czyta .ogg; potrzebne do T2)."""
+    if not shutil.which("ffmpeg"):
+        print("Brak ffmpeg — pomijam konwersję do WAV (instalacja: brew install ffmpeg).")
+        return
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", src, "-ac", "1", "-ar", "16000", "-c:a", "pcm_s16le", dst], check=True)
+    print(f"Przekonwertowano do WAV → {dst} ({os.path.getsize(dst) / 1e6:.0f} MB)")
 
 
 if __name__ == "__main__":

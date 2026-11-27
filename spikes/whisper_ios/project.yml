@@ -1,0 +1,30 @@
+name: OpenPlaudSpike
+options:
+  bundleIdPrefix: com.teldaspl.openplaud
+  deploymentTarget:
+    iOS: "17.0"
+packages:
+  WhisperKit:
+    url: https://github.com/argmaxinc/WhisperKit
+    from: 1.1.1
+targets:
+  OpenPlaudSpike:
+    type: application
+    platform: iOS
+    sources: [Sources]
+    dependencies:
+      - package: WhisperKit
+        product: WhisperKit
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.teldaspl.openplaud.spike
+        PRODUCT_NAME: openPlaud Test
+        MARKETING_VERSION: "0.1"
+        CURRENT_PROJECT_VERSION: "1"
+        SWIFT_VERSION: "5.0"
+        CODE_SIGN_STYLE: Automatic
+        TARGETED_DEVICE_FAMILY: "1,2"
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+        INFOPLIST_KEY_CFBundleDisplayName: openPlaud Test
